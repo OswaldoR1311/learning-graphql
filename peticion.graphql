@@ -1,0 +1,17 @@
+# query {
+# 	productoPorID(id: "100") {
+# 		nombre
+# 		descripcion
+# 	}
+# }
+
+mutation crearProducto {
+	crearProducto(
+		nombre: "Teclado Gamer"
+		precio: 120.00
+		descripcion: "Teclado Mécanico"
+	) {
+		id
+		nombre
+	}
+}

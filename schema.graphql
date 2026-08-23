@@ -1,0 +1,28 @@
+# Esquema de datos
+
+type Producto {
+	id: ID!
+	nombre: String!
+	precio: Float!
+	descripcion: String
+}
+
+type Usuario {
+	id: ID!
+	nombre: String!
+	email: String!
+}
+
+# Como pedir los datos, puerta de entrada para las lecturas
+type Query {
+	todosLosProductos: [Producto!]!
+	productoPorID(id: ID!): Producto
+	todosLosUsuarios: [Usuario!]!
+}
+
+# Mutar datos(crear, editar, eliminar)
+type Mutation {
+	#funcion
+	crearProducto(nombre: String!, precio: Float!, descripcion: String): Producto!
+	crearUsuario(nombre: String!, email: String!): Usuario!
+}
