@@ -1,9 +1,10 @@
 import { gql } from "@apollo/client"
 import { useQuery } from "@apollo/client/react"
 import Users from "./components/Users"
+import ProductForm from "./components/ProductForm"
 
 const ALL_PRODUCTS = gql`
-    query {
+    query allProducts {
         todosLosProductos {
             nombre
             precio
@@ -21,6 +22,7 @@ function App() {
 
 	return (
 		<div>
+			<ProductForm />
 			<Users products={data.todosLosProductos} />
 		</div>
 	)
