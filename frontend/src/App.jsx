@@ -1,32 +1,27 @@
 import { gql } from "@apollo/client"
 import { useQuery } from "@apollo/client/react"
+import Users from "./components/Users"
 
-const ALL_USERS = gql`
+const ALL_PRODUCTS = gql`
     query {
-        todosLosUsuarios {
-            id
+        todosLosProductos {
             nombre
-            email
+            precio
+            descripcion
         }
     }
 `
 
 function App() {
-	const { loading, data, error } = useQuery(ALL_USERS)
+	const { loading, data, error } = useQuery(ALL_PRODUCTS)
 
 	if (loading) {
 		return <div>loading data...</div>
 	}
 
-	console.log(data.todosLosUsuarios)
-
 	return (
 		<div>
-			<ul>
-				{data.todosLosUsuarios.map((u) => (
-					<li key={u.id}>{u.nombre}</li>
-				))}
-			</ul>
+			<Users products={data.todosLosProductos} />
 		</div>
 	)
 }
