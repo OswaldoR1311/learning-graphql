@@ -12,18 +12,18 @@ const ALL_USERS = gql`
 `
 
 function App() {
-	const result = useQuery(ALL_USERS)
+	const { loading, data, error } = useQuery(ALL_USERS)
 
-	if (result.loading) {
+	if (loading) {
 		return <div>loading data...</div>
 	}
 
-	console.log(result.data.todosLosUsuarios)
+	console.log(data.todosLosUsuarios)
 
 	return (
 		<div>
 			<ul>
-				{result.data.todosLosUsuarios.map((u) => (
+				{data.todosLosUsuarios.map((u) => (
 					<li key={u.id}>{u.nombre}</li>
 				))}
 			</ul>
