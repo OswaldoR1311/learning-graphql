@@ -1,28 +1,29 @@
-import { gql } from "@apollo/client"
 import { useQuery } from "@apollo/client/react"
 import Users from "./components/Users"
 import ProductForm from "./components/ProductForm"
-
-const ALL_PRODUCTS = gql`
-    query allProducts {
-        todosLosProductos {
-            nombre
-            precio
-            descripcion
-        }
-    }
-`
+import { ALL_PRODUCTS } from "./queries"
+import Notify from "./components/Notify"
+import { useState } from "react"
 
 function App() {
-	const { loading, data, error } = useQuery(ALL_PRODUCTS)
+	const [errorMessage, setErrorMessage] = useState(null)
+	const { loading, data } = useQuery(ALL_PRODUCTS)
 
 	if (loading) {
 		return <div>loading data...</div>
 	}
 
+	function notify(message) {
+		setErrorMessage(message)
+		setTimeout(() => {
+			setErrorMessage(null)
+		}, 10000)
+	}
+
 	return (
 		<div>
-			<ProductForm />
+			<Notify errorMessage={errorMessage} />
+			<ProductForm setError={notify} />
 			<Users products={data.todosLosProductos} />
 		</div>
 	)

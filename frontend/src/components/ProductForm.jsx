@@ -1,19 +1,8 @@
-import { gql } from "@apollo/client"
 import { useMutation } from "@apollo/client/react"
 import { useState } from "react"
+import { CREATE_PRODUCT } from "../queries"
 
-const CREATE_PRODUCT = gql`
-   mutation createProduct($nombre: String! $precio: Float! $descripcion: String) {
-    crearProducto(nombre: $nombre, precio: $precio, descripcion: $descripcion) {
-        nombre
-        precio
-        descripcion
-        id
-    }
-   }
-`
-
-function ProductForm() {
+function ProductForm({ setError }) {
 	const [nombre, setNombre] = useState("")
 	const [precio, setPrecio] = useState(0)
 	const [descripcion, setDescripcion] = useState("")
@@ -26,6 +15,7 @@ function ProductForm() {
 
 		crearF({
 			refetchQueries: ["allProducts"],
+			onError: (error) => setError(error.message),
 			variables: {
 				nombre,
 				precio: parseInt(precio),

@@ -25,4 +25,10 @@ type Mutation {
 	#funcion
 	crearProducto(nombre: String!, precio: Float!, descripcion: String): Producto!
 	crearUsuario(nombre: String!, email: String!): Usuario!
+	editarProducto(
+		id: ID!
+		nombre: String!
+		precio: Float!
+		descripcion: String
+	): Producto!
 }

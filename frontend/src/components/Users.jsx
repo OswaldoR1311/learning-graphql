@@ -1,16 +1,6 @@
-import { gql } from "@apollo/client"
 import { useQuery } from "@apollo/client/react"
 import { useState } from "react"
-
-const FIND_PRODUCT = gql`
-    query findProductByID($idToSearch: ID!) {
-        productoPorID(id: $idToSearch) {
-            nombre
-            precio
-            descripcion
-        }
-    }
-`
+import { FIND_PRODUCT } from "../queries"
 
 function Product({ product, onSelect }) {
 	return (

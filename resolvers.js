@@ -51,5 +51,20 @@ export const resolvers = {
 			usuariosBaseDeDatos.push(nuevoUsuario)
 			return nuevoUsuario
 		},
+		editarProducto: (root, args) => {
+			const product = productosBaseDeDatos.find(
+				(producto) => producto.id === args.id,
+			)
+
+			if (!product) {
+				throw new GraphQLError("El producto que intentas editar no existe")
+			}
+
+			if (args.nombre !== undefined) product.nombre = args.nombre
+			if (args.precio !== undefined) product.precio = args.precio
+			if (args.descripcion !== undefined) product.descripcion = args.descripcion
+
+			return product
+		},
 	},
 }
