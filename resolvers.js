@@ -1,4 +1,5 @@
 //Simulación de BD
+import { Usuario } from "./models/usuario"
 
 const productosBaseDeDatos = [
 	{
@@ -27,7 +28,7 @@ export const resolvers = {
 		productoPorID: (parent, args) => {
 			return productosBaseDeDatos.find((producto) => producto.id === args.id)
 		},
-		todosLosUsuarios: () => usuariosBaseDeDatos,
+		todosLosUsuarios: async () => Usuario.collection.countDocuments(),
 	},
 	Mutation: {
 		crearProducto: (root, args) => {

@@ -1,14 +1,13 @@
-import { ApolloServer } from "@apollo/server"
-import { startStandaloneServer } from "@apollo/server/standalone"
-import { readFileSync } from "fs"
-import { resolvers } from "./resolvers.js"
+import { configDotenv } from "dotenv"
+import connectToDatabase from "./db"
+import startServer from "./server"
 
-const typeDefs = readFileSync("./schema.graphql", { encoding: "utf-8" })
+const MONGODB_URI = process.env.MONGODB_URI
+const PORT = process.env.PORT || 4000
 
-const server = new ApolloServer({ typeDefs, resolvers })
+async function main() {
+	await connectToDatabase(MONGODB_URI)
+	startServer(PORT)
+}
 
-const { url } = await startStandaloneServer(server, {
-	listen: { port: 4000 },
-})
-
-console.log(`Server GraphQL corriendo en: ${url}`)
+main()
